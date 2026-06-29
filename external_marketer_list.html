@@ -1,0 +1,10 @@
+<div class="property-card">
+  <div class="photo" {% if p.cover_image %}style="background-image:url('{{ p.cover_image }}')"{% endif %}></div>
+  <div class="p-3">
+    <div class="d-flex justify-content-between gap-2"><b>{{ p.title }}</b><span class="badge badge-status">{{ p.get_status_display }}</span></div>
+    <p class="muted mb-1">{{ p.code }} · {{ p.district }} · {{ p.property_type }}</p>
+    <strong class="gold">{{ p.price|floatformat:0 }} ريال</strong>
+    {% if user.profile.role == 'executive' or user.is_superuser %}<small class="d-block muted">صاحب الإعلان: {{ p.created_by.first_name|default:p.created_by.username }}</small>{% endif %}
+    <a class="btn btn-sm btn-outline-gold mt-2" href="{% url 'property_detail' p.pk %}">عرض التفاصيل</a>
+  </div>
+</div>

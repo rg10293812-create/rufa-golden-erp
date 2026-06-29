@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block page_title %}لوحة التحكم{% endblock %}
+{% block content %}
+<div class="grid stats">
+  <div class="cardx"><span>إجمالي السعي</span><strong>{{ commission_total|floatformat:0 }} ريال</strong></div>
+  <div class="cardx"><span>رصيد الشركة</span><strong>{{ company_balance|floatformat:0 }} ريال</strong></div>
+  <div class="cardx"><span>المصروفات</span><strong>{{ expenses|floatformat:0 }} ريال</strong></div>
+  <div class="cardx"><span>المهام المفتوحة</span><strong>{{ open_tasks }}</strong></div>
+</div>
+<div class="section-card mt-4">
+  <div class="section-head"><h3>آخر العقارات</h3><a class="btn btn-gold" href="{% url 'property_add' %}">إضافة عقار</a></div>
+  <div class="property-grid">
+    {% for p in latest_properties %}{% include 'core/property_card.html' with p=p %}{% empty %}<p class="muted">لا توجد عقارات.</p>{% endfor %}
+  </div>
+</div>
+{% if latest_logs %}<div class="section-card mt-4"><h3>سجل العمليات</h3><ul class="timeline">{% for log in latest_logs %}<li><b>{{ log.action }}</b><span>{{ log.user }} · {{ log.created_at|date:'Y-m-d H:i' }}</span><p>{{ log.details }}</p></li>{% endfor %}</ul></div>{% endif %}
+{% endblock %}

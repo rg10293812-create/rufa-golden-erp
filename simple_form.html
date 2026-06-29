@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block page_title %}العقارات{% endblock %}
+{% block content %}
+<div class="section-card mb-3"><form class="searchbar"><input name="q" value="{{ q }}" class="form-control" placeholder="ابحث باسم المشروع، الحي، السعر، النوع، الكود"><button class="btn btn-gold">بحث</button><a class="btn btn-outline-gold" href="{% url 'property_add' %}">إضافة عقار</a></form></div>
+<div class="property-grid">{% for p in properties %}{% include 'core/property_card.html' with p=p %}{% empty %}<div class="section-card">لا توجد نتائج.</div>{% endfor %}</div>
+{% endblock %}

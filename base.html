@@ -1,0 +1,5 @@
+{% extends 'base.html' %}
+{% block page_title %}الصفقات والسعي{% endblock %}
+{% block content %}
+<div class="section-card"><div class="section-head"><h3>الصفقات</h3><a class="btn btn-gold" href="{% url 'deal_add' %}">تسجيل سعي</a></div><div class="table-responsive"><table class="table table-darkish"><thead><tr><th>الكود</th><th>العنوان</th><th>السعي</th><th>الشركة</th><th>الحالة</th><th></th></tr></thead><tbody>{% for d in deals %}<tr><td>{{ d.code }}</td><td>{{ d.title }}</td><td>{{ d.commission_amount|floatformat:0 }}</td><td>{{ d.company_share|floatformat:0 }}</td><td>{{ d.get_status_display }}</td><td><a class="btn btn-sm btn-outline-gold" href="{% url 'deal_share' d.pk %}">مشاركة السعي</a></td></tr>{% endfor %}</tbody></table></div></div>
+{% endblock %}

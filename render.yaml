@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: rufa-gold-erp
+    env: python
+    buildCommand: pip install -r requirements.txt && python manage.py migrate && python manage.py bootstrap_admin && python manage.py collectstatic --noinput
+    startCommand: gunicorn rufa_gold.wsgi:application
+    envVars:
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      - key: DJANGO_DEBUG
+        value: "False"
+      - key: DEFAULT_ADMIN_USERNAME
+        value: ROFA
+      - key: DEFAULT_ADMIN_PASSWORD
+        value: QQ1122qq11223
+      - key: DEFAULT_ADMIN_NAME
+        value: ROFA

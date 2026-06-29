@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block page_title %}تفاصيل العقار{% endblock %}
+{% block content %}
+<div class="section-card">
+  <div class="section-head"><div><h2>{{ property.title }}</h2><p class="muted">{{ property.code }} · {{ property.district }} · {{ property.property_type }}</p></div><div><a class="btn btn-outline-gold" href="{% url 'property_edit' property.pk %}">تعديل</a>{% if is_executive %}<a class="btn btn-gold" href="{% url 'deal_add' %}">تسجيل سعي</a>{% endif %}</div></div>
+  <div class="gallery">{% for img in property.images.all %}<img src="{{ img.image.url }}">{% empty %}<div class="empty-photo">لا توجد صور</div>{% endfor %}</div>
+  <div class="details-grid mt-4">
+    <div><span>السعر</span><b>{{ property.price|floatformat:0 }} ريال</b></div><div><span>المساحة</span><b>{{ property.area }}</b></div><div><span>الحالة</span><b>{{ property.get_status_display }}</b></div><div><span>صاحب الإعلان</span><b>{{ property.created_by.first_name|default:property.created_by.username }}</b></div>
+  </div>
+  <h4 class="mt-4">المواصفات</h4><p class="preline">{{ property.specifications }}</p>
+  <h4>الملاحظات</h4><p class="preline muted">{{ property.notes }}</p>
+</div>
+{% endblock %}
